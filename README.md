@@ -10,7 +10,7 @@ Forked from https://github.com/ammezie/blog-api to demonstrate the Weblo case st
 ## Setup
 - Install dependencies: `composer install`
 
-- Copy `.env.example` to a `.env` file and run `php artisan key:generate` to generate an application key.
+- Copy `.env.example` to a `.env` file and run `php artisan key:generate` to generate an application key, then `php artisan jwt:secret` to generate the JWT signing key.
 
 - Start a MySQL server on your local machine on port 3306 with root password `secret`, and create a database `weblo`. An easy way is to use Docker: `docker run -it -p 3306:3306 --name weblo-db -e MYSQL_DATABASE=weblo -e MYSQL_ROOT_PASSWORD=secret -d mysql`.
 

@@ -36,8 +36,8 @@ class PostController extends Controller
         // validate inputs
         $validatedData = $request->validate([
             'title' => 'required|unique:posts',
-            'content' => 'required',
-            'status' => 'required',
+            'content' => 'string',
+            'status' => 'boolean',
             'tags' => 'required',
         ]);
 
@@ -46,8 +46,8 @@ class PostController extends Controller
             'user_id' => $request->user()->id,
             'title' => $validatedData['title'],
             'slug' => str_slug($validatedData['title']),
-            'content' => $validatedData['content'],
-            'status' => !!$validatedData['status'],
+            'content' => $validatedData['content'] ?? '',
+            'status' => $validatedData['status'] ?? false,
         ]);
 
         // attach tags to the post
