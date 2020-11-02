@@ -1,0 +1,479 @@
+openapi: 3.0.3
+info:
+    title: 'Weblo API'
+    description: ''
+    version: 1.0.0
+servers:
+    -
+        url: 'http://localhost'
+paths:
+    /api/register:
+        post:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    /api/login:
+        post:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    /api/tags:
+        get:
+            summary: 'Display a list of tags.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: []
+                                    links: { first: 'http://localhost/api/tags?page=1', last: 'http://localhost/api/tags?page=1', prev: null, next: null }
+                                    meta: { current_page: 1, from: null, last_page: 1, path: 'http://localhost/api/tags', per_page: 25, to: null, total: 0 }
+                                properties:
+                                    data: { type: array, example: [] }
+                                    links: { type: object, example: { first: 'http://localhost/api/tags?page=1', last: 'http://localhost/api/tags?page=1', prev: null, next: null } }
+                                    meta: { type: object, example: { current_page: 1, from: null, last_page: 1, path: 'http://localhost/api/tags', per_page: 25, to: null, total: 0 } }
+            tags:
+                - Endpoints
+            security: []
+        post:
+            summary: 'Store a newly created tag in the database.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    '/api/tags/{tag}':
+        get:
+            summary: 'Display the specified tag.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                404:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: 'Resource not found'
+                                properties:
+                                    error: { type: string, example: 'Resource not found' }
+            tags:
+                - Endpoints
+            security: []
+        put:
+            summary: 'Update the specified tag in the database.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+        delete:
+            summary: 'Remove the specified tag from the database.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+        parameters:
+            -
+                in: path
+                name: tag
+                description: ''
+                example: quia
+                required: true
+                schema:
+                    type: string
+    /api/posts:
+        get:
+            summary: 'Display a list of posts.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: []
+                                    links: { first: 'http://localhost/api/posts?page=1', last: 'http://localhost/api/posts?page=1', prev: null, next: null }
+                                    meta: { current_page: 1, from: null, last_page: 1, path: 'http://localhost/api/posts', per_page: 25, to: null, total: 0 }
+                                properties:
+                                    data: { type: array, example: [] }
+                                    links: { type: object, example: { first: 'http://localhost/api/posts?page=1', last: 'http://localhost/api/posts?page=1', prev: null, next: null } }
+                                    meta: { type: object, example: { current_page: 1, from: null, last_page: 1, path: 'http://localhost/api/posts', per_page: 25, to: null, total: 0 } }
+            tags:
+                - Endpoints
+            security: []
+        post:
+            summary: 'Store a newly created resource in storage.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+    '/api/posts/{post}':
+        get:
+            summary: 'Display the specified post.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                404:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: 'Resource not found'
+                                properties:
+                                    error: { type: string, example: 'Resource not found' }
+            tags:
+                - Endpoints
+            security: []
+        put:
+            summary: 'Update the specified post in the database.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+        delete:
+            summary: 'Remove the specified post from the database.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+        parameters:
+            -
+                in: path
+                name: post
+                description: ''
+                example: sunt
+                required: true
+                schema:
+                    type: string
+    '/api/posts/{post}/comments':
+        get:
+            summary: 'Display a list of comments for the specified post.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                404:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: 'Resource not found'
+                                properties:
+                                    error: { type: string, example: 'Resource not found' }
+            tags:
+                - Endpoints
+            security: []
+        post:
+            summary: 'Store a newly created comment in the database.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+        parameters:
+            -
+                in: path
+                name: post
+                description: ''
+                example: incidunt
+                required: true
+                schema:
+                    type: string
+    '/api/posts/{post}/comments/{comment}':
+        put:
+            summary: 'Update the specified comment in the database'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+            security: []
+        parameters:
+            -
+                in: path
+                name: post
+                description: ''
+                example: nisi
+                required: true
+                schema:
+                    type: string
+            -
+                in: path
+                name: comment
+                description: ''
+                example: laboriosam
+                required: true
+                schema:
+                    type: string
+    /:
+        get:
+            summary: ''
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        text/plain:
+                            schema:
+                                type: string
+                                example: "<!doctype html>\r\n<html lang=\"en\">\r\n    <head>\r\n        <meta charset=\"utf-8\">\r\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\r\n\r\n        <title>Laravel</title>\r\n\r\n        <!-- Fonts -->\r\n        <link href=\"https://fonts.googleapis.com/css?family=Nunito:200,600\" rel=\"stylesheet\" type=\"text/css\">\r\n\r\n        <!-- Styles -->\r\n        <style>\r\n            html, body {\r\n                background-color: #fff;\r\n                color: #636b6f;\r\n                font-family: 'Nunito', sans-serif;\r\n                font-weight: 200;\r\n                height: 100vh;\r\n                margin: 0;\r\n            }\r\n\r\n            .full-height {\r\n                height: 100vh;\r\n            }\r\n\r\n            .flex-center {\r\n                align-items: center;\r\n                display: flex;\r\n                justify-content: center;\r\n            }\r\n\r\n            .position-ref {\r\n                position: relative;\r\n            }\r\n\r\n            .top-right {\r\n                position: absolute;\r\n                right: 10px;\r\n                top: 18px;\r\n            }\r\n\r\n            .content {\r\n                text-align: center;\r\n            }\r\n\r\n            .title {\r\n                font-size: 84px;\r\n            }\r\n\r\n            .links > a {\r\n                color: #636b6f;\r\n                padding: 0 25px;\r\n                font-size: 13px;\r\n                font-weight: 600;\r\n                letter-spacing: .1rem;\r\n                text-decoration: none;\r\n                text-transform: uppercase;\r\n            }\r\n\r\n            .m-b-md {\r\n                margin-bottom: 30px;\r\n            }\r\n        </style>\r\n    </head>\r\n    <body>\r\n        <div class=\"flex-center position-ref full-height\">\r\n            \r\n            <div class=\"content\">\r\n                <div class=\"title m-b-md\">\r\n                    Laravel\r\n                </div>\r\n\r\n                <div class=\"links\">\r\n                    <a href=\"https://laravel.com/docs\">Documentation</a>\r\n                    <a href=\"https://laracasts.com\">Laracasts</a>\r\n                    <a href=\"https://laravel-news.com\">News</a>\r\n                    <a href=\"https://nova.laravel.com\">Nova</a>\r\n                    <a href=\"https://forge.laravel.com\">Forge</a>\r\n                    <a href=\"https://github.com/laravel/laravel\">GitHub</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </body>\r\n</html>\r\n"
+            tags:
+                - Endpoints
+            security: []
