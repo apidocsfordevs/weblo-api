@@ -26,7 +26,7 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create a new post.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
