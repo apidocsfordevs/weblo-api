@@ -25,19 +25,22 @@ toc_footers:
 
 
 
-This documentation aims to provide all the information you need to work with our API.
+The Weblo API allows you to manage and view info about your Weblo blog as well as retrieve some public information about Weblo. The APi is largely REST-based. Most endpoints accept JSON input and return JSON responses. 
 
-<aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
-You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
+<aside class="warning">You must always set the `Accept` header to `application/json`, otherwise some requests may return invalid responses.</aside>
+
+To use the API, you'll need to sign up for Weblo. You can do this on our homepage, or via the `POST /register` endpoint. Then retrieve a new token via `POST /login`.
+
+For any enquiries, send us an email: api@weblo.blog.
 
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
 <script>
-    var baseUrl = "http://localhost";
+    var baseUrl = "http://localhost:8000";
 </script>
 <script src="js/tryitout.js"></script>
 
 > Base URL
 
 ```yaml
-http://localhost
+http://localhost:8000
 ```

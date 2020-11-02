@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Weblo API",
-        "_postman_id": "00727adb-c353-4903-bc52-648323b4bb4a",
+        "_postman_id": "486099de-d616-4053-8689-cfbee6bac6a7",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -20,7 +20,7 @@
             "description": "",
             "item": [
                 {
-                    "name": "api\/register",
+                    "name": "Create a Weblo account.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -49,7 +49,7 @@
                     "response": []
                 },
                 {
-                    "name": "api\/login",
+                    "name": "Generate an access token.",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -99,10 +99,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": ""
                     },
                     "response": []
                 },
@@ -128,10 +125,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": "No two tags can have the same name."
                     },
                     "response": []
                 },
@@ -148,7 +142,7 @@
                                 {
                                     "id": "tag",
                                     "key": "tag",
-                                    "value": "quia",
+                                    "value": "enim",
                                     "description": ""
                                 }
                             ]
@@ -165,10 +159,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": ""
                     },
                     "response": []
                 },
@@ -185,175 +176,6 @@
                                 {
                                     "id": "tag",
                                     "key": "tag",
-                                    "value": "cumque",
-                                    "description": ""
-                                }
-                            ]
-                        },
-                        "method": "PUT",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Remove the specified tag from the database.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/tags\/:tag",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/tags\/:tag",
-                            "variable": [
-                                {
-                                    "id": "tag",
-                                    "key": "tag",
-                                    "value": "culpa",
-                                    "description": ""
-                                }
-                            ]
-                        },
-                        "method": "DELETE",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Display a list of posts.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/posts",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/posts"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Store a newly created resource in storage.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/posts",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/posts"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Display the specified post.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/posts\/:post",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/posts\/:post",
-                            "variable": [
-                                {
-                                    "id": "post",
-                                    "key": "post",
-                                    "value": "sunt",
-                                    "description": ""
-                                }
-                            ]
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Update the specified post in the database.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/posts\/:post",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/posts\/:post",
-                            "variable": [
-                                {
-                                    "id": "post",
-                                    "key": "post",
                                     "value": "molestiae",
                                     "description": ""
                                 }
@@ -371,27 +193,24 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": ""
                     },
                     "response": []
                 },
                 {
-                    "name": "Remove the specified post from the database.",
+                    "name": "Remove the specified tag from the database.",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "{{baseUrl}}",
-                            "path": "api\/posts\/:post",
+                            "path": "api\/tags\/:tag",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/posts\/:post",
+                            "raw": "http:\/\/{{baseUrl}}\/api\/tags\/:tag",
                             "variable": [
                                 {
-                                    "id": "post",
-                                    "key": "post",
-                                    "value": "maiores",
+                                    "id": "tag",
+                                    "key": "tag",
+                                    "value": "tempore",
                                     "description": ""
                                 }
                             ]
@@ -408,27 +227,86 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": ""
                     },
                     "response": []
                 },
                 {
-                    "name": "Display a list of comments for the specified post.",
+                    "name": "Display a list of posts.",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "{{baseUrl}}",
-                            "path": "api\/posts\/:post\/comments",
+                            "path": "api\/posts",
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "15",
+                                    "description": "The page number of the result set to return.",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/posts?page=15"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create a really good new post",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/posts\/:post\/comments",
+                            "raw": "http:\/\/{{baseUrl}}\/api\/posts"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"repudiandae\",\n    \"content\": \"et\",\n    \"status\": false,\n    \"tags\": [\n        16,\n        19\n    ]\n}"
+                        },
+                        "description": ""
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Display the specified post.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts\/:post",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/posts\/:post",
                             "variable": [
                                 {
                                     "id": "post",
                                     "key": "post",
-                                    "value": "incidunt",
+                                    "value": "necessitatibus",
                                     "description": ""
                                 }
                             ]
@@ -445,70 +323,24 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": ""
                     },
                     "response": []
                 },
                 {
-                    "name": "Store a newly created comment in the database.",
+                    "name": "Update the specified post in the database.",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "{{baseUrl}}",
-                            "path": "api\/posts\/:post\/comments",
+                            "path": "api\/posts\/:post",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/posts\/:post\/comments",
+                            "raw": "http:\/\/{{baseUrl}}\/api\/posts\/:post",
                             "variable": [
                                 {
                                     "id": "post",
                                     "key": "post",
-                                    "value": "animi",
-                                    "description": ""
-                                }
-                            ]
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Update the specified comment in the database",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/posts\/:post\/comments\/:comment",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/posts\/:post\/comments\/:comment",
-                            "variable": [
-                                {
-                                    "id": "post",
-                                    "key": "post",
-                                    "value": "nisi",
-                                    "description": ""
-                                },
-                                {
-                                    "id": "comment",
-                                    "key": "comment",
-                                    "value": "laboriosam",
+                                    "value": "distinctio",
                                     "description": ""
                                 }
                             ]
@@ -525,22 +357,61 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": ""
                     },
                     "response": []
                 },
                 {
-                    "name": "\/",
+                    "name": "Remove the specified post from the database.",
                     "request": {
                         "url": {
                             "protocol": "http",
                             "host": "{{baseUrl}}",
-                            "path": "\/",
+                            "path": "api\/posts\/:post",
                             "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/\/"
+                            "raw": "http:\/\/{{baseUrl}}\/api\/posts\/:post",
+                            "variable": [
+                                {
+                                    "id": "post",
+                                    "key": "post",
+                                    "value": "non",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Display a list of comments for the specified post.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts\/:post\/comments",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/posts\/:post\/comments",
+                            "variable": [
+                                {
+                                    "id": "post",
+                                    "key": "post",
+                                    "value": "aut",
+                                    "description": ""
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -554,10 +425,81 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
+                        "description": ""
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Store a newly created comment in the database.",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts\/:post\/comments",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/posts\/:post\/comments",
+                            "variable": [
+                                {
+                                    "id": "post",
+                                    "key": "post",
+                                    "value": "et",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update the specified comment in the database",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts\/:post\/comments\/:comment",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/posts\/:post\/comments\/:comment",
+                            "variable": [
+                                {
+                                    "id": "post",
+                                    "key": "post",
+                                    "value": "voluptatem",
+                                    "description": ""
+                                },
+                                {
+                                    "id": "comment",
+                                    "key": "comment",
+                                    "value": "dicta",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": ""
                     },
                     "response": []
                 }
@@ -565,6 +507,6 @@
         }
     ],
     "auth": {
-        "type": "noauth"
+        "type": "bearer"
     }
 }

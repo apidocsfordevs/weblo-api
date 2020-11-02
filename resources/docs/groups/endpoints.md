@@ -1,7 +1,7 @@
 # Endpoints
 
 
-## api/register
+## Create a Weblo account.
 
 
 
@@ -10,14 +10,14 @@
 
 ```bash
 curl -X POST \
-    "http://localhost/api/register" \
+    "http://localhost:8000/api/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/register"
+    "http://localhost:8000/api/register"
 );
 
 let headers = {
@@ -33,6 +33,24 @@ fetch(url, {
 ```
 
 
+> Example response (422):
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "name": [
+            "The name field is required."
+        ],
+        "email": [
+            "The email field is required."
+        ],
+        "password": [
+            "The password field is required."
+        ]
+    }
+}
+```
 <div id="execution-results-POSTapi-register" hidden>
     <blockquote>Received response<span id="execution-response-status-POSTapi-register"></span>:</blockquote>
     <pre class="json"><code id="execution-response-content-POSTapi-register"></code></pre>
@@ -55,7 +73,7 @@ fetch(url, {
 </form>
 
 
-## api/login
+## Generate an access token.
 
 
 
@@ -64,14 +82,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/login" \
+    "http://localhost:8000/api/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/login"
+    "http://localhost:8000/api/login"
 );
 
 let headers = {
@@ -87,6 +105,13 @@ fetch(url, {
 ```
 
 
+> Example response (401):
+
+```json
+{
+    "error": "Unauthorized"
+}
+```
 <div id="execution-results-POSTapi-login" hidden>
     <blockquote>Received response<span id="execution-response-status-POSTapi-login"></span>:</blockquote>
     <pre class="json"><code id="execution-response-content-POSTapi-login"></code></pre>
@@ -111,6 +136,7 @@ fetch(url, {
 
 ## Display a list of tags.
 
+<small class="badge badge-darkred">requires authentication</small>
 
 
 
@@ -118,17 +144,19 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/tags" \
+    -G "http://localhost:8000/api/tags" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/tags"
+    "http://localhost:8000/api/tags"
 );
 
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -145,7 +173,244 @@ fetch(url, {
 
 ```json
 {
-    "data": [],
+    "data": [
+        {
+            "id": 1,
+            "name": "things",
+            "slug": "things",
+            "description": "About things",
+            "created_at": "2020-11-02 18:23:39",
+            "updated_at": "2020-11-02 18:23:39",
+            "posts": [
+                {
+                    "id": 3,
+                    "user_id": 1,
+                    "title": "How My Night Came",
+                    "slug": "how-my-night-came",
+                    "content": "Another Thing",
+                    "status": 0,
+                    "created_at": "2020-11-02 18:25:03",
+                    "updated_at": "2020-11-02 18:25:03",
+                    "pivot": {
+                        "tag_id": 1,
+                        "post_id": 3
+                    }
+                },
+                {
+                    "id": 4,
+                    "user_id": 1,
+                    "title": "How My Day Did Go",
+                    "slug": "how-my-day-did-go",
+                    "content": "No big deal",
+                    "status": 1,
+                    "created_at": "2020-11-02 18:33:13",
+                    "updated_at": "2020-11-02 18:33:13",
+                    "pivot": {
+                        "tag_id": 1,
+                        "post_id": 4
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "more things",
+            "slug": "more-things",
+            "description": "About even more things",
+            "created_at": "2020-11-02 18:23:53",
+            "updated_at": "2020-11-02 18:23:53",
+            "posts": [
+                {
+                    "id": 1,
+                    "user_id": 1,
+                    "title": "How My Day Went",
+                    "slug": "how-my-day-went",
+                    "content": "Something",
+                    "status": 0,
+                    "created_at": "2020-11-02 18:24:27",
+                    "updated_at": "2020-11-02 18:24:27",
+                    "pivot": {
+                        "tag_id": 2,
+                        "post_id": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "user_id": 1,
+                    "title": "How My Night Went",
+                    "slug": "how-my-night-went",
+                    "content": "Another Thing",
+                    "status": 0,
+                    "created_at": "2020-11-02 18:24:52",
+                    "updated_at": "2020-11-02 18:24:52",
+                    "pivot": {
+                        "tag_id": 2,
+                        "post_id": 2
+                    }
+                },
+                {
+                    "id": 5,
+                    "user_id": 1,
+                    "title": "How I'm doing",
+                    "slug": "how-im-doing",
+                    "content": "No big deal",
+                    "status": 1,
+                    "created_at": "2020-11-02 18:33:27",
+                    "updated_at": "2020-11-02 18:33:27",
+                    "pivot": {
+                        "tag_id": 2,
+                        "post_id": 5
+                    }
+                },
+                {
+                    "id": 6,
+                    "user_id": 1,
+                    "title": "How I Did It",
+                    "slug": "how-i-did-it",
+                    "content": "No big deal",
+                    "status": 1,
+                    "created_at": "2020-11-02 18:34:19",
+                    "updated_at": "2020-11-02 18:34:19",
+                    "pivot": {
+                        "tag_id": 2,
+                        "post_id": 6
+                    }
+                },
+                {
+                    "id": 7,
+                    "user_id": 1,
+                    "title": "How I Did It Again",
+                    "slug": "how-i-did-it-again",
+                    "content": "No big deal",
+                    "status": 1,
+                    "created_at": "2020-11-02 18:39:22",
+                    "updated_at": "2020-11-02 18:39:22",
+                    "pivot": {
+                        "tag_id": 2,
+                        "post_id": 7
+                    }
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "more more things",
+            "slug": "more-more-things",
+            "description": "About some more things",
+            "created_at": "2020-11-02 18:24:01",
+            "updated_at": "2020-11-02 18:24:01",
+            "posts": [
+                {
+                    "id": 4,
+                    "user_id": 1,
+                    "title": "How My Day Did Go",
+                    "slug": "how-my-day-did-go",
+                    "content": "No big deal",
+                    "status": 1,
+                    "created_at": "2020-11-02 18:33:13",
+                    "updated_at": "2020-11-02 18:33:13",
+                    "pivot": {
+                        "tag_id": 3,
+                        "post_id": 4
+                    }
+                },
+                {
+                    "id": 5,
+                    "user_id": 1,
+                    "title": "How I'm doing",
+                    "slug": "how-im-doing",
+                    "content": "No big deal",
+                    "status": 1,
+                    "created_at": "2020-11-02 18:33:27",
+                    "updated_at": "2020-11-02 18:33:27",
+                    "pivot": {
+                        "tag_id": 3,
+                        "post_id": 5
+                    }
+                },
+                {
+                    "id": 6,
+                    "user_id": 1,
+                    "title": "How I Did It",
+                    "slug": "how-i-did-it",
+                    "content": "No big deal",
+                    "status": 1,
+                    "created_at": "2020-11-02 18:34:19",
+                    "updated_at": "2020-11-02 18:34:19",
+                    "pivot": {
+                        "tag_id": 3,
+                        "post_id": 6
+                    }
+                },
+                {
+                    "id": 7,
+                    "user_id": 1,
+                    "title": "How I Did It Again",
+                    "slug": "how-i-did-it-again",
+                    "content": "No big deal",
+                    "status": 1,
+                    "created_at": "2020-11-02 18:39:22",
+                    "updated_at": "2020-11-02 18:39:22",
+                    "pivot": {
+                        "tag_id": 3,
+                        "post_id": 7
+                    }
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "dumb things",
+            "slug": "dumb-things",
+            "description": "DUMB things",
+            "created_at": "2020-11-02 18:24:17",
+            "updated_at": "2020-11-02 18:24:17",
+            "posts": [
+                {
+                    "id": 1,
+                    "user_id": 1,
+                    "title": "How My Day Went",
+                    "slug": "how-my-day-went",
+                    "content": "Something",
+                    "status": 0,
+                    "created_at": "2020-11-02 18:24:27",
+                    "updated_at": "2020-11-02 18:24:27",
+                    "pivot": {
+                        "tag_id": 4,
+                        "post_id": 1
+                    }
+                },
+                {
+                    "id": 2,
+                    "user_id": 1,
+                    "title": "How My Night Went",
+                    "slug": "how-my-night-went",
+                    "content": "Another Thing",
+                    "status": 0,
+                    "created_at": "2020-11-02 18:24:52",
+                    "updated_at": "2020-11-02 18:24:52",
+                    "pivot": {
+                        "tag_id": 4,
+                        "post_id": 2
+                    }
+                },
+                {
+                    "id": 3,
+                    "user_id": 1,
+                    "title": "How My Night Came",
+                    "slug": "how-my-night-came",
+                    "content": "Another Thing",
+                    "status": 0,
+                    "created_at": "2020-11-02 18:25:03",
+                    "updated_at": "2020-11-02 18:25:03",
+                    "pivot": {
+                        "tag_id": 4,
+                        "post_id": 3
+                    }
+                }
+            ]
+        }
+    ],
     "links": {
         "first": "http:\/\/localhost\/api\/tags?page=1",
         "last": "http:\/\/localhost\/api\/tags?page=1",
@@ -154,12 +419,12 @@ fetch(url, {
     },
     "meta": {
         "current_page": 1,
-        "from": null,
+        "from": 1,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/tags",
         "per_page": 25,
-        "to": null,
-        "total": 0
+        "to": 4,
+        "total": 4
     }
 }
 ```
@@ -171,7 +436,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-GETapi-tags"></code></pre>
 </div>
-<form id="form-GETapi-tags" data-method="GET" data-path="api/tags" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-tags', this);">
+<form id="form-GETapi-tags" data-method="GET" data-path="api/tags" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-tags', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-tags" onclick="tryItOut('GETapi-tags');">Try it out ⚡</button>
@@ -182,29 +447,35 @@ fetch(url, {
 <small class="badge badge-green">GET</small>
  <b><code>api/tags</code></b>
 </p>
+<p>
+<label id="auth-GETapi-tags" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-tags" data-component="header"></label>
+</p>
 </form>
 
 
 ## Store a newly created tag in the database.
 
+<small class="badge badge-darkred">requires authentication</small>
 
-
+No two tags can have the same name.
 
 > Example request:
 
 ```bash
 curl -X POST \
-    "http://localhost/api/tags" \
+    "http://localhost:8000/api/tags" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/tags"
+    "http://localhost:8000/api/tags"
 );
 
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -217,6 +488,21 @@ fetch(url, {
 ```
 
 
+> Example response (422):
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "name": [
+            "The name field is required."
+        ],
+        "description": [
+            "The description field is required."
+        ]
+    }
+}
+```
 <div id="execution-results-POSTapi-tags" hidden>
     <blockquote>Received response<span id="execution-response-status-POSTapi-tags"></span>:</blockquote>
     <pre class="json"><code id="execution-response-content-POSTapi-tags"></code></pre>
@@ -225,7 +511,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-tags"></code></pre>
 </div>
-<form id="form-POSTapi-tags" data-method="POST" data-path="api/tags" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-tags', this);">
+<form id="form-POSTapi-tags" data-method="POST" data-path="api/tags" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-tags', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-tags" onclick="tryItOut('POSTapi-tags');">Try it out ⚡</button>
@@ -236,11 +522,15 @@ fetch(url, {
 <small class="badge badge-black">POST</small>
  <b><code>api/tags</code></b>
 </p>
+<p>
+<label id="auth-POSTapi-tags" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-tags" data-component="header"></label>
+</p>
 </form>
 
 
 ## Display the specified tag.
 
+<small class="badge badge-darkred">requires authentication</small>
 
 
 
@@ -248,17 +538,19 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/tags/quia" \
+    -G "http://localhost:8000/api/tags/enim" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/tags/quia"
+    "http://localhost:8000/api/tags/enim"
 );
 
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -286,7 +578,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-GETapi-tags--tag-"></code></pre>
 </div>
-<form id="form-GETapi-tags--tag-" data-method="GET" data-path="api/tags/{tag}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-tags--tag-', this);">
+<form id="form-GETapi-tags--tag-" data-method="GET" data-path="api/tags/{tag}" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-tags--tag-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-tags--tag-" onclick="tryItOut('GETapi-tags--tag-');">Try it out ⚡</button>
@@ -296,6 +588,9 @@ fetch(url, {
 <p>
 <small class="badge badge-green">GET</small>
  <b><code>api/tags/{tag}</code></b>
+</p>
+<p>
+<label id="auth-GETapi-tags--tag-" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-tags--tag-" data-component="header"></label>
 </p>
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <p>
@@ -308,6 +603,7 @@ fetch(url, {
 
 ## Update the specified tag in the database.
 
+<small class="badge badge-darkred">requires authentication</small>
 
 
 
@@ -315,17 +611,19 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/tags/cumque" \
+    "http://localhost:8000/api/tags/molestiae" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/tags/cumque"
+    "http://localhost:8000/api/tags/molestiae"
 );
 
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -346,7 +644,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-tags--tag-"></code></pre>
 </div>
-<form id="form-PUTapi-tags--tag-" data-method="PUT" data-path="api/tags/{tag}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-tags--tag-', this);">
+<form id="form-PUTapi-tags--tag-" data-method="PUT" data-path="api/tags/{tag}" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-tags--tag-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-PUTapi-tags--tag-" onclick="tryItOut('PUTapi-tags--tag-');">Try it out ⚡</button>
@@ -361,6 +659,9 @@ fetch(url, {
 <small class="badge badge-purple">PATCH</small>
  <b><code>api/tags/{tag}</code></b>
 </p>
+<p>
+<label id="auth-PUTapi-tags--tag-" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="PUTapi-tags--tag-" data-component="header"></label>
+</p>
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <p>
 <b><code>tag</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
@@ -372,6 +673,7 @@ fetch(url, {
 
 ## Remove the specified tag from the database.
 
+<small class="badge badge-darkred">requires authentication</small>
 
 
 
@@ -379,17 +681,19 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/tags/culpa" \
+    "http://localhost:8000/api/tags/tempore" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/tags/culpa"
+    "http://localhost:8000/api/tags/tempore"
 );
 
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -410,7 +714,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-DELETEapi-tags--tag-"></code></pre>
 </div>
-<form id="form-DELETEapi-tags--tag-" data-method="DELETE" data-path="api/tags/{tag}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-tags--tag-', this);">
+<form id="form-DELETEapi-tags--tag-" data-method="DELETE" data-path="api/tags/{tag}" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-tags--tag-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-DELETEapi-tags--tag-" onclick="tryItOut('DELETEapi-tags--tag-');">Try it out ⚡</button>
@@ -420,6 +724,9 @@ fetch(url, {
 <p>
 <small class="badge badge-red">DELETE</small>
  <b><code>api/tags/{tag}</code></b>
+</p>
+<p>
+<label id="auth-DELETEapi-tags--tag-" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="DELETEapi-tags--tag-" data-component="header"></label>
 </p>
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <p>
@@ -432,6 +739,7 @@ fetch(url, {
 
 ## Display a list of posts.
 
+<small class="badge badge-darkred">requires authentication</small>
 
 
 
@@ -439,17 +747,25 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/posts" \
+    -G "http://localhost:8000/api/posts?page=15" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/posts"
+    "http://localhost:8000/api/posts"
 );
 
+let params = {
+    "page": "15",
+};
+Object.keys(params)
+    .forEach(key => url.searchParams.append(key, params[key]));
+
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -470,17 +786,17 @@ fetch(url, {
     "links": {
         "first": "http:\/\/localhost\/api\/posts?page=1",
         "last": "http:\/\/localhost\/api\/posts?page=1",
-        "prev": null,
+        "prev": "http:\/\/localhost\/api\/posts?page=14",
         "next": null
     },
     "meta": {
-        "current_page": 1,
+        "current_page": 15,
         "from": null,
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/posts",
         "per_page": 25,
         "to": null,
-        "total": 0
+        "total": 7
     }
 }
 ```
@@ -492,7 +808,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-GETapi-posts"></code></pre>
 </div>
-<form id="form-GETapi-posts" data-method="GET" data-path="api/posts" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-posts', this);">
+<form id="form-GETapi-posts" data-method="GET" data-path="api/posts" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-posts', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-posts" onclick="tryItOut('GETapi-posts');">Try it out ⚡</button>
@@ -503,11 +819,21 @@ fetch(url, {
 <small class="badge badge-green">GET</small>
  <b><code>api/posts</code></b>
 </p>
+<p>
+<label id="auth-GETapi-posts" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-posts" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Query Parameters</b></h4>
+<p>
+<b><code>page</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="page" data-endpoint="GETapi-posts" data-component="query"  hidden>
+<br>
+The page number of the result set to return.</p>
 </form>
 
 
-## Store a newly created resource in storage.
+## Create a really good new post
 
+<small class="badge badge-darkred">requires authentication</small>
 
 
 
@@ -515,29 +841,68 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/posts" \
+    "http://localhost:8000/api/posts" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"title":"repudiandae","content":"et","status":false,"tags":[16,19]}'
+
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/posts"
+    "http://localhost:8000/api/posts"
 );
 
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
+let body = {
+    "title": "repudiandae",
+    "content": "et",
+    "status": false,
+    "tags": [
+        16,
+        19
+    ]
+}
 
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response => response.json());
 ```
 
 
+> Example response (201):
+
+```json
+{
+    "data": {
+        "id": 9,
+        "title": "repudiandae",
+        "slug": "repudiandae",
+        "content": "et",
+        "status": false,
+        "created_at": "2020-11-02 18:49:21",
+        "updated_at": "2020-11-02 18:49:21",
+        "user": {
+            "id": 1,
+            "name": "Twix",
+            "email": "sa@ax.com",
+            "email_verified_at": null,
+            "created_at": "2020-11-02 18:20:36",
+            "updated_at": "2020-11-02 18:20:36"
+        },
+        "tags": [],
+        "comments": []
+    }
+}
+```
 <div id="execution-results-POSTapi-posts" hidden>
     <blockquote>Received response<span id="execution-response-status-POSTapi-posts"></span>:</blockquote>
     <pre class="json"><code id="execution-response-content-POSTapi-posts"></code></pre>
@@ -546,7 +911,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-posts"></code></pre>
 </div>
-<form id="form-POSTapi-posts" data-method="POST" data-path="api/posts" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts', this);">
+<form id="form-POSTapi-posts" data-method="POST" data-path="api/posts" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-posts" onclick="tryItOut('POSTapi-posts');">Try it out ⚡</button>
@@ -557,11 +922,39 @@ fetch(url, {
 <small class="badge badge-black">POST</small>
  <b><code>api/posts</code></b>
 </p>
+<p>
+<label id="auth-POSTapi-posts" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-posts" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>title</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="title" data-endpoint="POSTapi-posts" data-component="body" required  hidden>
+<br>
+The title of the post</p>
+<p>
+<b><code>content</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="content" data-endpoint="POSTapi-posts" data-component="body" required  hidden>
+<br>
+</p>
+<p>
+<b><code>status</code></b>&nbsp;&nbsp;<small>boolean</small>     <i>optional</i> &nbsp;
+<label data-endpoint="POSTapi-posts" hidden><input type="radio" name="status" value="true" data-endpoint="POSTapi-posts" data-component="body" ><code>true</code></label>
+<label data-endpoint="POSTapi-posts" hidden><input type="radio" name="status" value="false" data-endpoint="POSTapi-posts" data-component="body" ><code>false</code></label>
+<br>
+Set to true to publish.</p>
+<p>
+<b><code>tags</code></b>&nbsp;&nbsp;<small>integer[]</small>     <i>optional</i> &nbsp;
+<input type="number" name="tags.0" data-endpoint="POSTapi-posts" data-component="body"  hidden>
+<input type="number" name="tags.1" data-endpoint="POSTapi-posts" data-component="body" hidden>
+<br>
+List of tag IDs to attach to the post.</p>
+
 </form>
 
 
 ## Display the specified post.
 
+<small class="badge badge-darkred">requires authentication</small>
 
 
 
@@ -569,17 +962,19 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/posts/sunt" \
+    -G "http://localhost:8000/api/posts/necessitatibus" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/posts/sunt"
+    "http://localhost:8000/api/posts/necessitatibus"
 );
 
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -607,7 +1002,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-GETapi-posts--post-"></code></pre>
 </div>
-<form id="form-GETapi-posts--post-" data-method="GET" data-path="api/posts/{post}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-posts--post-', this);">
+<form id="form-GETapi-posts--post-" data-method="GET" data-path="api/posts/{post}" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-posts--post-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-posts--post-" onclick="tryItOut('GETapi-posts--post-');">Try it out ⚡</button>
@@ -617,6 +1012,9 @@ fetch(url, {
 <p>
 <small class="badge badge-green">GET</small>
  <b><code>api/posts/{post}</code></b>
+</p>
+<p>
+<label id="auth-GETapi-posts--post-" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-posts--post-" data-component="header"></label>
 </p>
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <p>
@@ -629,6 +1027,7 @@ fetch(url, {
 
 ## Update the specified post in the database.
 
+<small class="badge badge-darkred">requires authentication</small>
 
 
 
@@ -636,17 +1035,19 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/posts/molestiae" \
+    "http://localhost:8000/api/posts/distinctio" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/posts/molestiae"
+    "http://localhost:8000/api/posts/distinctio"
 );
 
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -667,7 +1068,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-posts--post-"></code></pre>
 </div>
-<form id="form-PUTapi-posts--post-" data-method="PUT" data-path="api/posts/{post}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post-', this);">
+<form id="form-PUTapi-posts--post-" data-method="PUT" data-path="api/posts/{post}" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-PUTapi-posts--post-" onclick="tryItOut('PUTapi-posts--post-');">Try it out ⚡</button>
@@ -682,6 +1083,9 @@ fetch(url, {
 <small class="badge badge-purple">PATCH</small>
  <b><code>api/posts/{post}</code></b>
 </p>
+<p>
+<label id="auth-PUTapi-posts--post-" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="PUTapi-posts--post-" data-component="header"></label>
+</p>
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <p>
 <b><code>post</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
@@ -693,6 +1097,7 @@ fetch(url, {
 
 ## Remove the specified post from the database.
 
+<small class="badge badge-darkred">requires authentication</small>
 
 
 
@@ -700,17 +1105,19 @@ fetch(url, {
 
 ```bash
 curl -X DELETE \
-    "http://localhost/api/posts/maiores" \
+    "http://localhost:8000/api/posts/non" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/posts/maiores"
+    "http://localhost:8000/api/posts/non"
 );
 
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -731,7 +1138,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-DELETEapi-posts--post-"></code></pre>
 </div>
-<form id="form-DELETEapi-posts--post-" data-method="DELETE" data-path="api/posts/{post}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-posts--post-', this);">
+<form id="form-DELETEapi-posts--post-" data-method="DELETE" data-path="api/posts/{post}" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('DELETEapi-posts--post-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-DELETEapi-posts--post-" onclick="tryItOut('DELETEapi-posts--post-');">Try it out ⚡</button>
@@ -741,6 +1148,9 @@ fetch(url, {
 <p>
 <small class="badge badge-red">DELETE</small>
  <b><code>api/posts/{post}</code></b>
+</p>
+<p>
+<label id="auth-DELETEapi-posts--post-" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="DELETEapi-posts--post-" data-component="header"></label>
 </p>
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <p>
@@ -753,6 +1163,7 @@ fetch(url, {
 
 ## Display a list of comments for the specified post.
 
+<small class="badge badge-darkred">requires authentication</small>
 
 
 
@@ -760,17 +1171,19 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/posts/incidunt/comments" \
+    -G "http://localhost:8000/api/posts/aut/comments" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/posts/incidunt/comments"
+    "http://localhost:8000/api/posts/aut/comments"
 );
 
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -798,7 +1211,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-GETapi-posts--post--comments"></code></pre>
 </div>
-<form id="form-GETapi-posts--post--comments" data-method="GET" data-path="api/posts/{post}/comments" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-posts--post--comments', this);">
+<form id="form-GETapi-posts--post--comments" data-method="GET" data-path="api/posts/{post}/comments" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-posts--post--comments', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-posts--post--comments" onclick="tryItOut('GETapi-posts--post--comments');">Try it out ⚡</button>
@@ -808,6 +1221,9 @@ fetch(url, {
 <p>
 <small class="badge badge-green">GET</small>
  <b><code>api/posts/{post}/comments</code></b>
+</p>
+<p>
+<label id="auth-GETapi-posts--post--comments" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-posts--post--comments" data-component="header"></label>
 </p>
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <p>
@@ -820,6 +1236,7 @@ fetch(url, {
 
 ## Store a newly created comment in the database.
 
+<small class="badge badge-darkred">requires authentication</small>
 
 
 
@@ -827,17 +1244,19 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/posts/animi/comments" \
+    "http://localhost:8000/api/posts/et/comments" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/posts/animi/comments"
+    "http://localhost:8000/api/posts/et/comments"
 );
 
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -850,6 +1269,13 @@ fetch(url, {
 ```
 
 
+> Example response (404):
+
+```json
+{
+    "error": "Resource not found"
+}
+```
 <div id="execution-results-POSTapi-posts--post--comments" hidden>
     <blockquote>Received response<span id="execution-response-status-POSTapi-posts--post--comments"></span>:</blockquote>
     <pre class="json"><code id="execution-response-content-POSTapi-posts--post--comments"></code></pre>
@@ -858,7 +1284,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-POSTapi-posts--post--comments"></code></pre>
 </div>
-<form id="form-POSTapi-posts--post--comments" data-method="POST" data-path="api/posts/{post}/comments" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts--post--comments', this);">
+<form id="form-POSTapi-posts--post--comments" data-method="POST" data-path="api/posts/{post}/comments" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-posts--post--comments', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-posts--post--comments" onclick="tryItOut('POSTapi-posts--post--comments');">Try it out ⚡</button>
@@ -868,6 +1294,9 @@ fetch(url, {
 <p>
 <small class="badge badge-black">POST</small>
  <b><code>api/posts/{post}/comments</code></b>
+</p>
+<p>
+<label id="auth-POSTapi-posts--post--comments" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="POSTapi-posts--post--comments" data-component="header"></label>
 </p>
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <p>
@@ -880,6 +1309,7 @@ fetch(url, {
 
 ## Update the specified comment in the database
 
+<small class="badge badge-darkred">requires authentication</small>
 
 
 
@@ -887,17 +1317,19 @@ fetch(url, {
 
 ```bash
 curl -X PUT \
-    "http://localhost/api/posts/nisi/comments/laboriosam" \
+    "http://localhost:8000/api/posts/voluptatem/comments/dicta" \
+    -H "Authorization: Bearer {YOUR_AUTH_KEY}" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/posts/nisi/comments/laboriosam"
+    "http://localhost:8000/api/posts/voluptatem/comments/dicta"
 );
 
 let headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
     "Content-Type": "application/json",
     "Accept": "application/json",
 };
@@ -918,7 +1350,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-PUTapi-posts--post--comments--comment-"></code></pre>
 </div>
-<form id="form-PUTapi-posts--post--comments--comment-" data-method="PUT" data-path="api/posts/{post}/comments/{comment}" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post--comments--comment-', this);">
+<form id="form-PUTapi-posts--post--comments--comment-" data-method="PUT" data-path="api/posts/{post}/comments/{comment}" data-authed="1" data-hasfiles="0" data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('PUTapi-posts--post--comments--comment-', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-PUTapi-posts--post--comments--comment-" onclick="tryItOut('PUTapi-posts--post--comments--comment-');">Try it out ⚡</button>
@@ -933,6 +1365,9 @@ fetch(url, {
 <small class="badge badge-purple">PATCH</small>
  <b><code>api/posts/{post}/comments/{comment}</code></b>
 </p>
+<p>
+<label id="auth-PUTapi-posts--post--comments--comment-" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="PUTapi-posts--post--comments--comment-" data-component="header"></label>
+</p>
 <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
 <p>
 <b><code>post</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
@@ -943,151 +1378,6 @@ fetch(url, {
 <b><code>comment</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
 <input type="text" name="comment" data-endpoint="PUTapi-posts--post--comments--comment-" data-component="url" required  hidden>
 <br>
-</p>
-</form>
-
-
-## /
-
-
-
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://localhost/" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://localhost/"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response => response.json());
-```
-
-
-> Example response (200):
-
-```json
-
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
-
-```
-<div id="execution-results-GET-" hidden>
-    <blockquote>Received response<span id="execution-response-status-GET-"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GET-"></code></pre>
-</div>
-<div id="execution-error-GET-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GET-"></code></pre>
-</div>
-<form id="form-GET-" data-method="GET" data-path="/" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GET-', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GET-" onclick="tryItOut('GET-');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GET-" onclick="cancelTryOut('GET-');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GET-" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-green">GET</small>
- <b><code>/</code></b>
 </p>
 </form>
 

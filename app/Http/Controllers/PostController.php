@@ -18,6 +18,8 @@ class PostController extends Controller
     /**
      * Display a list of posts.
      *
+     * @queryParam page integer The page number of the result set to return.
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -27,6 +29,11 @@ class PostController extends Controller
 
     /**
      * Create a really good new post
+     *
+     * @bodyParam title string required The title of the post
+     * @bodyParam content string required
+     * @bodyParam status boolean Set to true to publish.
+     * @bodyParam tags integer[] List of tag IDs to attach to the post.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

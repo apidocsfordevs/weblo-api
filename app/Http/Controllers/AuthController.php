@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
+    /** Create a Weblo account.
+     *
+     * @unauthenticated
+     */
     public function register(Request $request)
     {
         $validatedData = $request->validate([
@@ -27,6 +31,10 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    /** Generate an access token.
+     *
+     * @unauthenticated
+     */
     public function login(Request $request)
     {
         $credentials = $request->only(['email', 'password']);

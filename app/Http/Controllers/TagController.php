@@ -28,6 +28,8 @@ class TagController extends Controller
     /**
      * Store a newly created tag in the database.
      *
+     * No two tags can have the same name.
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
