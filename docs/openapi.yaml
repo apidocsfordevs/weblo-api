@@ -1,0 +1,627 @@
+openapi: 3.0.3
+info:
+    title: 'Weblo API'
+    description: ''
+    version: 1.0.0
+servers:
+    -
+        url: 'http://localhost:8000'
+paths:
+    /api/register:
+        post:
+            summary: 'Create a Weblo account.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                422:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    message: 'The given data was invalid.'
+                                    errors: { name: ['The name field is required.'], email: ['The email field is required.'], password: ['The password field is required.'] }
+                                properties:
+                                    message: { type: string, example: 'The given data was invalid.' }
+                                    errors: { type: object, example: { name: ['The name field is required.'], email: ['The email field is required.'], password: ['The password field is required.'] } }
+            tags:
+                - Endpoints
+            security: []
+    /api/login:
+        post:
+            summary: 'Generate an access token.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                401:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: Unauthorized
+                                properties:
+                                    error: { type: string, example: Unauthorized }
+            tags:
+                - Endpoints
+            security: []
+    /api/tags:
+        get:
+            summary: 'Display a list of tags.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: [{ id: 1, name: things, slug: things, description: 'About things', created_at: '2020-11-02 18:23:39', updated_at: '2020-11-02 18:23:39', posts: [{ id: 3, user_id: 1, title: 'How My Night Came', slug: how-my-night-came, content: 'Another Thing', status: 0, created_at: '2020-11-02 18:25:03', updated_at: '2020-11-02 18:25:03', pivot: { tag_id: 1, post_id: 3 } }, { id: 4, user_id: 1, title: 'How My Day Did Go', slug: how-my-day-did-go, content: 'No big deal', status: 1, created_at: '2020-11-02 18:33:13', updated_at: '2020-11-02 18:33:13', pivot: { tag_id: 1, post_id: 4 } }] }, { id: 2, name: 'more things', slug: more-things, description: 'About even more things', created_at: '2020-11-02 18:23:53', updated_at: '2020-11-02 18:23:53', posts: [{ id: 1, user_id: 1, title: 'How My Day Went', slug: how-my-day-went, content: Something, status: 0, created_at: '2020-11-02 18:24:27', updated_at: '2020-11-02 18:24:27', pivot: { tag_id: 2, post_id: 1 } }, { id: 2, user_id: 1, title: 'How My Night Went', slug: how-my-night-went, content: 'Another Thing', status: 0, created_at: '2020-11-02 18:24:52', updated_at: '2020-11-02 18:24:52', pivot: { tag_id: 2, post_id: 2 } }, { id: 5, user_id: 1, title: 'How I''m doing', slug: how-im-doing, content: 'No big deal', status: 1, created_at: '2020-11-02 18:33:27', updated_at: '2020-11-02 18:33:27', pivot: { tag_id: 2, post_id: 5 } }, { id: 6, user_id: 1, title: 'How I Did It', slug: how-i-did-it, content: 'No big deal', status: 1, created_at: '2020-11-02 18:34:19', updated_at: '2020-11-02 18:34:19', pivot: { tag_id: 2, post_id: 6 } }, { id: 7, user_id: 1, title: 'How I Did It Again', slug: how-i-did-it-again, content: 'No big deal', status: 1, created_at: '2020-11-02 18:39:22', updated_at: '2020-11-02 18:39:22', pivot: { tag_id: 2, post_id: 7 } }] }, { id: 3, name: 'more more things', slug: more-more-things, description: 'About some more things', created_at: '2020-11-02 18:24:01', updated_at: '2020-11-02 18:24:01', posts: [{ id: 4, user_id: 1, title: 'How My Day Did Go', slug: how-my-day-did-go, content: 'No big deal', status: 1, created_at: '2020-11-02 18:33:13', updated_at: '2020-11-02 18:33:13', pivot: { tag_id: 3, post_id: 4 } }, { id: 5, user_id: 1, title: 'How I''m doing', slug: how-im-doing, content: 'No big deal', status: 1, created_at: '2020-11-02 18:33:27', updated_at: '2020-11-02 18:33:27', pivot: { tag_id: 3, post_id: 5 } }, { id: 6, user_id: 1, title: 'How I Did It', slug: how-i-did-it, content: 'No big deal', status: 1, created_at: '2020-11-02 18:34:19', updated_at: '2020-11-02 18:34:19', pivot: { tag_id: 3, post_id: 6 } }, { id: 7, user_id: 1, title: 'How I Did It Again', slug: how-i-did-it-again, content: 'No big deal', status: 1, created_at: '2020-11-02 18:39:22', updated_at: '2020-11-02 18:39:22', pivot: { tag_id: 3, post_id: 7 } }] }, { id: 4, name: 'dumb things', slug: dumb-things, description: 'DUMB things', created_at: '2020-11-02 18:24:17', updated_at: '2020-11-02 18:24:17', posts: [{ id: 1, user_id: 1, title: 'How My Day Went', slug: how-my-day-went, content: Something, status: 0, created_at: '2020-11-02 18:24:27', updated_at: '2020-11-02 18:24:27', pivot: { tag_id: 4, post_id: 1 } }, { id: 2, user_id: 1, title: 'How My Night Went', slug: how-my-night-went, content: 'Another Thing', status: 0, created_at: '2020-11-02 18:24:52', updated_at: '2020-11-02 18:24:52', pivot: { tag_id: 4, post_id: 2 } }, { id: 3, user_id: 1, title: 'How My Night Came', slug: how-my-night-came, content: 'Another Thing', status: 0, created_at: '2020-11-02 18:25:03', updated_at: '2020-11-02 18:25:03', pivot: { tag_id: 4, post_id: 3 } }] }]
+                                    links: { first: 'http://localhost/api/tags?page=1', last: 'http://localhost/api/tags?page=1', prev: null, next: null }
+                                    meta: { current_page: 1, from: 1, last_page: 1, path: 'http://localhost/api/tags', per_page: 25, to: 4, total: 4 }
+                                properties:
+                                    data: { type: array, example: [{ id: 1, name: things, slug: things, description: 'About things', created_at: '2020-11-02 18:23:39', updated_at: '2020-11-02 18:23:39', posts: [{ id: 3, user_id: 1, title: 'How My Night Came', slug: how-my-night-came, content: 'Another Thing', status: 0, created_at: '2020-11-02 18:25:03', updated_at: '2020-11-02 18:25:03', pivot: { tag_id: 1, post_id: 3 } }, { id: 4, user_id: 1, title: 'How My Day Did Go', slug: how-my-day-did-go, content: 'No big deal', status: 1, created_at: '2020-11-02 18:33:13', updated_at: '2020-11-02 18:33:13', pivot: { tag_id: 1, post_id: 4 } }] }, { id: 2, name: 'more things', slug: more-things, description: 'About even more things', created_at: '2020-11-02 18:23:53', updated_at: '2020-11-02 18:23:53', posts: [{ id: 1, user_id: 1, title: 'How My Day Went', slug: how-my-day-went, content: Something, status: 0, created_at: '2020-11-02 18:24:27', updated_at: '2020-11-02 18:24:27', pivot: { tag_id: 2, post_id: 1 } }, { id: 2, user_id: 1, title: 'How My Night Went', slug: how-my-night-went, content: 'Another Thing', status: 0, created_at: '2020-11-02 18:24:52', updated_at: '2020-11-02 18:24:52', pivot: { tag_id: 2, post_id: 2 } }, { id: 5, user_id: 1, title: 'How I''m doing', slug: how-im-doing, content: 'No big deal', status: 1, created_at: '2020-11-02 18:33:27', updated_at: '2020-11-02 18:33:27', pivot: { tag_id: 2, post_id: 5 } }, { id: 6, user_id: 1, title: 'How I Did It', slug: how-i-did-it, content: 'No big deal', status: 1, created_at: '2020-11-02 18:34:19', updated_at: '2020-11-02 18:34:19', pivot: { tag_id: 2, post_id: 6 } }, { id: 7, user_id: 1, title: 'How I Did It Again', slug: how-i-did-it-again, content: 'No big deal', status: 1, created_at: '2020-11-02 18:39:22', updated_at: '2020-11-02 18:39:22', pivot: { tag_id: 2, post_id: 7 } }] }, { id: 3, name: 'more more things', slug: more-more-things, description: 'About some more things', created_at: '2020-11-02 18:24:01', updated_at: '2020-11-02 18:24:01', posts: [{ id: 4, user_id: 1, title: 'How My Day Did Go', slug: how-my-day-did-go, content: 'No big deal', status: 1, created_at: '2020-11-02 18:33:13', updated_at: '2020-11-02 18:33:13', pivot: { tag_id: 3, post_id: 4 } }, { id: 5, user_id: 1, title: 'How I''m doing', slug: how-im-doing, content: 'No big deal', status: 1, created_at: '2020-11-02 18:33:27', updated_at: '2020-11-02 18:33:27', pivot: { tag_id: 3, post_id: 5 } }, { id: 6, user_id: 1, title: 'How I Did It', slug: how-i-did-it, content: 'No big deal', status: 1, created_at: '2020-11-02 18:34:19', updated_at: '2020-11-02 18:34:19', pivot: { tag_id: 3, post_id: 6 } }, { id: 7, user_id: 1, title: 'How I Did It Again', slug: how-i-did-it-again, content: 'No big deal', status: 1, created_at: '2020-11-02 18:39:22', updated_at: '2020-11-02 18:39:22', pivot: { tag_id: 3, post_id: 7 } }] }, { id: 4, name: 'dumb things', slug: dumb-things, description: 'DUMB things', created_at: '2020-11-02 18:24:17', updated_at: '2020-11-02 18:24:17', posts: [{ id: 1, user_id: 1, title: 'How My Day Went', slug: how-my-day-went, content: Something, status: 0, created_at: '2020-11-02 18:24:27', updated_at: '2020-11-02 18:24:27', pivot: { tag_id: 4, post_id: 1 } }, { id: 2, user_id: 1, title: 'How My Night Went', slug: how-my-night-went, content: 'Another Thing', status: 0, created_at: '2020-11-02 18:24:52', updated_at: '2020-11-02 18:24:52', pivot: { tag_id: 4, post_id: 2 } }, { id: 3, user_id: 1, title: 'How My Night Came', slug: how-my-night-came, content: 'Another Thing', status: 0, created_at: '2020-11-02 18:25:03', updated_at: '2020-11-02 18:25:03', pivot: { tag_id: 4, post_id: 3 } }] }], items: { type: object } }
+                                    links: { type: object, example: { first: 'http://localhost/api/tags?page=1', last: 'http://localhost/api/tags?page=1', prev: null, next: null } }
+                                    meta: { type: object, example: { current_page: 1, from: 1, last_page: 1, path: 'http://localhost/api/tags', per_page: 25, to: 4, total: 4 } }
+            tags:
+                - Endpoints
+        post:
+            summary: 'Store a newly created tag in the database.'
+            description: 'No two tags can have the same name.'
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                422:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    message: 'The given data was invalid.'
+                                    errors: { name: ['The name field is required.'], description: ['The description field is required.'] }
+                                properties:
+                                    message: { type: string, example: 'The given data was invalid.' }
+                                    errors: { type: object, example: { name: ['The name field is required.'], description: ['The description field is required.'] } }
+            tags:
+                - Endpoints
+    '/api/tags/{tag}':
+        get:
+            summary: 'Display the specified tag.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                404:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: 'Resource not found'
+                                properties:
+                                    error: { type: string, example: 'Resource not found' }
+            tags:
+                - Endpoints
+        put:
+            summary: 'Update the specified tag in the database.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+        delete:
+            summary: 'Remove the specified tag from the database.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+        parameters:
+            -
+                in: path
+                name: tag
+                description: ''
+                example: enim
+                required: true
+                schema:
+                    type: string
+    /api/posts:
+        get:
+            summary: 'Display a list of posts.'
+            description: ''
+            parameters:
+                -
+                    in: query
+                    name: page
+                    description: 'The page number of the result set to return.'
+                    example: 15
+                    required: false
+                    schema:
+                        type: integer
+                        description: 'The page number of the result set to return.'
+                        example: 15
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                200:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: []
+                                    links: { first: 'http://localhost/api/posts?page=1', last: 'http://localhost/api/posts?page=1', prev: 'http://localhost/api/posts?page=14', next: null }
+                                    meta: { current_page: 15, from: null, last_page: 1, path: 'http://localhost/api/posts', per_page: 25, to: null, total: 7 }
+                                properties:
+                                    data: { type: array, example: [] }
+                                    links: { type: object, example: { first: 'http://localhost/api/posts?page=1', last: 'http://localhost/api/posts?page=1', prev: 'http://localhost/api/posts?page=14', next: null } }
+                                    meta: { type: object, example: { current_page: 15, from: null, last_page: 1, path: 'http://localhost/api/posts', per_page: 25, to: null, total: 7 } }
+            tags:
+                - Endpoints
+        post:
+            summary: 'Create a really good new post'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                201:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    data: { id: 9, title: repudiandae, slug: repudiandae, content: et, status: false, created_at: '2020-11-02 18:49:21', updated_at: '2020-11-02 18:49:21', user: { id: 1, name: Twix, email: sa@ax.com, email_verified_at: null, created_at: '2020-11-02 18:20:36', updated_at: '2020-11-02 18:20:36' }, tags: [], comments: [] }
+                                properties:
+                                    data: { type: object, example: { id: 9, title: repudiandae, slug: repudiandae, content: et, status: false, created_at: '2020-11-02 18:49:21', updated_at: '2020-11-02 18:49:21', user: { id: 1, name: Twix, email: sa@ax.com, email_verified_at: null, created_at: '2020-11-02 18:20:36', updated_at: '2020-11-02 18:20:36' }, tags: [], comments: [] } }
+            tags:
+                - Endpoints
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                title:
+                                    type: string
+                                    description: 'The title of the post'
+                                    example: repudiandae
+                                content:
+                                    type: string
+                                    description: ''
+                                    example: et
+                                status:
+                                    type: boolean
+                                    description: 'Set to true to publish.'
+                                    example: false
+                                tags:
+                                    type: array
+                                    description: 'List of tag IDs to attach to the post.'
+                                    example: [16, 19]
+                                    items: { type: integer }
+                            required:
+                                - title
+                                - content
+    '/api/posts/{post}':
+        get:
+            summary: 'Display the specified post.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                404:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: 'Resource not found'
+                                properties:
+                                    error: { type: string, example: 'Resource not found' }
+            tags:
+                - Endpoints
+        put:
+            summary: 'Update the specified post in the database.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+        delete:
+            summary: 'Remove the specified post from the database.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+        parameters:
+            -
+                in: path
+                name: post
+                description: ''
+                example: necessitatibus
+                required: true
+                schema:
+                    type: string
+    '/api/posts/{post}/comments':
+        get:
+            summary: 'Display a list of comments for the specified post.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                404:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: 'Resource not found'
+                                properties:
+                                    error: { type: string, example: 'Resource not found' }
+            tags:
+                - Endpoints
+        post:
+            summary: 'Store a newly created comment in the database.'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses:
+                404:
+                    description: ''
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                example:
+                                    error: 'Resource not found'
+                                properties:
+                                    error: { type: string, example: 'Resource not found' }
+            tags:
+                - Endpoints
+        parameters:
+            -
+                in: path
+                name: post
+                description: ''
+                example: aut
+                required: true
+                schema:
+                    type: string
+    '/api/posts/{post}/comments/{comment}':
+        put:
+            summary: 'Update the specified comment in the database'
+            description: ''
+            parameters:
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {YOUR_AUTH_KEY}'
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Content-Type
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+                -
+                    in: header
+                    name: Accept
+                    description: ''
+                    example: application/json
+                    schema:
+                        type: string
+            responses: {  }
+            tags:
+                - Endpoints
+        parameters:
+            -
+                in: path
+                name: post
+                description: ''
+                example: voluptatem
+                required: true
+                schema:
+                    type: string
+            -
+                in: path
+                name: comment
+                description: ''
+                example: dicta
+                required: true
+                schema:
+                    type: string
+components:
+    securitySchemes:
+        default:
+            type: http
+            scheme: bearer
+            description: ''
+security:
+    -
+        default: []
