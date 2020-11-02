@@ -26,7 +26,7 @@ class PostController extends Controller
     }
 
     /**
-     * Create a new post
+     * Create a really good new post
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
